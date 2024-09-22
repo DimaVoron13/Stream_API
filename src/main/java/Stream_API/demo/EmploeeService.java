@@ -1,16 +1,17 @@
 package Stream_API.demo;
 
 import java.util.Set;
+import java.util.Collection;
 
-public abstract class EmploeeService {
+public interface EmploeeService {
 
-    abstract Emploee maxSalary(Integer salary);
+    Emploee maxSalary(Integer salary);
 
-    abstract Emploee minSalary(Integer salary);
+    Emploee minSalary(Integer salary);
 
-    abstract Set findEmploees(Integer depId);
+    Set findEmploees(Integer depId);
 
-    abstract Set eploeesInDepartment(Integer departament);
+    Set eploeesInDepartment(Integer departament);
 
-    abstract Set allEmploees();
+    Set allEmploees();
 }

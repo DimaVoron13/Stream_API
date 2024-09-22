@@ -3,9 +3,22 @@ package Stream_API.demo;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class EmploeeServiceImpl extends EmploeeService {
+public class EmploeeServiceImpl implements EmploeeService {
 
-    private static Set<Emploee> emploees = new HashSet<>();
+    private Set<Emploee> emploees = new HashSet<>();
+
+    {
+        emploees.add(new Emploee("Андрицкая", "Светлана", 1, 86811));
+        emploees.add(new Emploee("Соболева", "Елена", 2, 80000));
+        emploees.add(new Emploee("Некрасова", "Олеся", 3, 99100));
+        emploees.add(new Emploee("Стяжкина", "Надежда", 4, 97600));
+        emploees.add(new Emploee("Лампель", "Екатерина", 5, 84667));
+        emploees.add(new Emploee("Смирнов", "Евгений", 5, 73000));
+        emploees.add(new Emploee("Леуский", "Владислав", 4, 125400));
+        emploees.add(new Emploee("Яковлев", "Андрей", 3, 95410));
+        emploees.add(new Emploee("Хохлов", "Сергей", 1, 142000));
+        emploees.add(new Emploee("Дудоров", "Олег", 1, 82000));
+    }
 
     @Override
     public Emploee maxSalary(Integer depId) {
@@ -18,7 +31,6 @@ public class EmploeeServiceImpl extends EmploeeService {
 
     @Override
     public Emploee minSalary(Integer depId) {
-
         Emploee emploeeInDepartment = emploees.stream()
                 .filter(emploee -> Objects.equals(emploee.getDepartmentNo(), depId))
                 .min(Comparator.comparing(Emploee::getSalary))
@@ -40,34 +52,11 @@ public class EmploeeServiceImpl extends EmploeeService {
         Set<Emploee> temp = emploees.stream()
                 .filter(emploee -> Objects.equals(emploee.getDepartmentNo(), depId))
                 .collect(Collectors.toSet());
-        return temp;
+        return Collections.unmodifiableSet(temp);
     }
 
     @Override
     public Set allEmploees() {
-        return emploees;
-    }
-
-    public static void emploeesAbOvo() {
-        Emploee temp = new Emploee("Андрицкая", "Светлана", 1, 86811);
-        emploees.add(temp);
-        temp = new Emploee("Соболева", "Елена", 2, 80000);
-        emploees.add(temp);
-        temp = new Emploee("Некрасова", "Олеся", 3, 99100);
-        emploees.add(temp);
-        temp = new Emploee("Стяжкина", "Надежда", 4, 97600);
-        emploees.add(temp);
-        temp = new Emploee("Лампель", "Екатерина", 5, 84667);
-        emploees.add(temp);
-        temp = new Emploee("Смирнов", "Евгений", 5, 73000);
-        emploees.add(temp);
-        temp = new Emploee("Леуский", "Владислав", 4, 125400);
-        emploees.add(temp);
-        temp = new Emploee("Яковлев", "Андрей", 3, 95410);
-        emploees.add(temp);
-        temp = new Emploee("Хохлов", "Сергей", 1, 142000);
-        emploees.add(temp);
-        temp = new Emploee("Дудоров", "Олег", 1, 82000);
-        emploees.add(temp);
+        return Collections.unmodifiableSet(emploees);
     }
 }
